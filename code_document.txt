@@ -1,0 +1,37 @@
+"""
+gemini-ap.py
+
+A Streamlit app that uses Google Gemini AI to answer questions about a job description.
+It embeds the job description, retrieves relevant context for user queries, and generates answers.
+
+Modules:
+    - os: For file operations (not used in current code).
+    - numpy: For vector operations and similarity calculations.
+    - google.generativeai: For Gemini API access (embeddings and generative model).
+    - streamlit: For building the interactive web app.
+
+Configuration:
+    - GOOGLE_API_KEY: Gemini API key.
+    - TEXT_FILE: Path to the job description text file.
+    - CHUNK_SIZE: Number of characters per chunk for embedding.
+    - TOP_K: Number of top relevant chunks to retrieve for context.
+    - EMBED_MODEL: Gemini embedding model name.
+    - GEN_MODEL: Gemini generative model name.
+
+Workflow:
+    1. Reads the job description from TEXT_FILE.
+    2. Splits the text into chunks of CHUNK_SIZE characters.
+    3. Embeds each chunk using Gemini's embedding model.
+    4. Accepts user queries via Streamlit chat input.
+    5. Embeds the query and computes cosine similarity with chunk embeddings.
+    6. Retrieves TOP_K most relevant chunks as context.
+    7. Sends the context and query to Gemini's generative model for an answer.
+    8. Displays the user query and AI response in the Streamlit app.
+
+Functions:
+    - embed(texts): Embeds a list of texts using Gemini's embedding model and normalizes the vectors.
+    - prompting(query): Handles the query, retrieves context, generates the answer, and displays results.
+
+Usage:
+    Run with Streamlit:
+        streamlit run gemini-ap.py
